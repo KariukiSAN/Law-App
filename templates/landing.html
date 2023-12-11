@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Welcome to the Website</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <style>
+    .landing-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        background-image: url('https://i.redd.it/yiwaddm8d7g81.jpg');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        text-align: center;
+    }
+
+    .navbar {
+        display: flex;
+        justify-content: flex-end;
+        padding: 20px;
+    }
+
+    .navbar a {
+        margin-left: 10px;
+        padding: 10px 20px;
+        color: white;
+        text-decoration: none;
+        background-color: lightblue;
+        border-radius: 5px;
+        transition: background-color 0.3s;
+    }
+
+    .navbar a:hover {
+        background-color: #87ceeb;
+        animation: pulse 1s infinite;
+    }
+
+    @keyframes pulse {
+        0% { background-color: #87ceeb; }
+        50% { background-color: #00bfff; }
+        100% { background-color: #87ceeb; }
+    }
+    </style>
+</head>
+<body>
+    <div class="landing-container">
+    <div class="navbar">
+        <a href="/login">Login</a>
+        <a href="/signup">Sign Up</a>
+    </div>
+    <h1 class="landing-title">Welcome to the Website</h1>
+    </div>
+</body>
+</html>
