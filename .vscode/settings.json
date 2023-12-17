@@ -1,5 +1,9 @@
 {
     "cSpell.words": [
-        "werkzeug"
+        "backref",
+        "jsonify",
+        "sqlalchemy",
+        "werkzeug",
+        "wtforms"
     ]
 }

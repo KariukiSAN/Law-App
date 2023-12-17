@@ -5,7 +5,7 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-image: url("https://qph.cf2.poecdn.net/main-sdxl_e883a3978a102ee838ca370c2c02bfef13634541f97d9f891f43ed53328ae28d.png?w=1024&h=1024");
+            background-image: url("https://qph.cf2.poecdn.net/main-sdxl_9bf08a290cc46c5aa6d1dce2d3a710037026027be3d6daa757b45e460dea5d78.png?w=1024&h=1024");
             background-size: cover;
             background-position: center;
             margin: 0;
@@ -55,12 +55,13 @@
         }
 
         .success-message {
-            background-color: #0056b3;
+            background-color: #0056B3;
             color: white;
             padding: 10px;
             border-radius: 5px;
             text-align: center;
             margin-top: 20px;
+            display: none;
         }
 
         form {
@@ -82,7 +83,7 @@
         }
 
         button[type="submit"] {
-            background-color: #0056b3;
+            background-color: #0056B3;
             color: white;
             padding: 10px 20px;
             border: none;
@@ -91,7 +92,7 @@
         }
 
         button[type="submit"]:hover {
-            background-color: #0056b3;
+            background-color: #0056B3;
         }
     </style>
 </head>
@@ -128,14 +129,18 @@
     </form>
 </div>
 
+<div id="successMessage" class="success-message"></div>
+
 <script>
     function bookAppointment() {
         // Perform the booking logic here
         // For demonstration purposes, let's assume the booking was successful
-        var successMessage = document.createElement("div");
-        successMessage.className = "success-message";
+        var successMessage = document.getElementById("successMessage");
         successMessage.textContent = "Your Appointment has been booked successfully!";
-        document.body.appendChild(successMessage);
+        successMessage.style.display = "block";
+        setTimeout(function() {
+            successMessage.style.display = "none";
+        }, 5000); // Hide the success message after 5 seconds
         return false; // Prevent form submission
     }
 </script>
