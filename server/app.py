@@ -3,62 +3,48 @@ from flask import Flask, render_template, request, send_from_directory, session,
 from database import create_table, insert_user, verify_credentials
 
 app = Flask(__name__)
-#app = Flask(__name__, static_folder='static', template_folder='static/build')
+app.secret_key = 'your_secret_key'
 
-#Need to discuss this
-app.secret_key = 'your_secret_key'  # Set a secret key for session encryption. TBD
+create_table()
 
-create_table()  # Call the create_table function to create the users table
-
-# Defining the routes for login and signup pages
 @app.route('/')
 def landing():
     return render_template('landing.html')
 
-@app.route('/login', methods=['GET', 'POST'])
-def login():
-    if request.method == 'POST':
-        username = request.form['username']
-        password = request.form['password']
-        
-        # Verify credentials against the stored user information in the database
-        if verify_credentials(username, password):
-            # User authentication succeeded
-            session['username'] = username  # Store the username in the session
-            return redirect('/dashboard')  # Redirect the user to the dashboard page
-        else:
-            # User authentication failed
-            return "Invalid credentials. Please try again."
-    else:
-        return render_template('login.html')
-
-@app.route('/signup', methods=['GET', 'POST'])
+@app.route('/signup', methods=['POST'])
 def signup():
-    if request.method == 'POST':
-        username = request.form['username']
-        email = request.form['email']
-        password = request.form['password']
-        
+    name = request.form.get('name')
+    email = request.form.get('email')
+    password = request.form.get('password')
 
+    # Perform signup logic here
+    insert_user(name, email, password)
 
-        
-        insert_user(username, email, password)
+    return redirect('/dashboard')
 
-        session['username'] = username  
-        return redirect('/dashboard')  
+@app.route('/login', methods=['POST'])
+def login():
+    username = request.form.get('username')
+    password = request.form.get('password')
+
+    # Perform login logic here
+    if verify_credentials(username, password):
+        session['username'] = username
+        return redirect('/dashboard')
     else:
-        return render_template('signup.html')
+        return redirect('/')
 
 @app.route('/dashboard')
 def dashboard():
-    return send_from_directory(os.path.join(app.static_folder, 'build'), 'index.html')
+    if 'username' in session:
+        return render_template('dashboard.html', username=session['username'])
+    else:
+        return redirect('/')
 
-@app.route('/static/js/<path:filename>')
-def serve_static(filename):
-    return send_from_directory(os.path.join(app.static_folder, 'build', 'static', 'js'), filename)
+@app.route('/logout')
+def logout():
+    session.pop('username', None)
+    return redirect('/')
 
 if __name__ == '__main__':
     app.run(debug=True)
-
-
-    

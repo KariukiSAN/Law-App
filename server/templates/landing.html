@@ -1,61 +1,102 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Welcome to the Website</title>
-    <link rel="stylesheet" type="text/css" href="styles.css">
+    <title>Welcome to our Legal App</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
     <style>
-    .landing-container {
+        .landing-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-image: url('https://qph.cf2.poecdn.net/main-sdxl_55c0a6a28c99f1c283469285dbf9529dd67a5f7f000347289ce81bc4d42e3cda.png?w=1024&h=1024');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            text-align: center;
+        }
 
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        height: 100vh;
-        background-image: url('https://qph.cf2.poecdn.net/main-sdxl_55c0a6a28c99f1c283469285dbf9529dd67a5f7f000347289ce81bc4d42e3cda.png?w=1024&h=1024');
-        background-size: cover;
-        background-position: center;
-        background-repeat: no-repeat;
-        
-        text-align: center;
+        .card-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 20px;
+        }
 
+        .card {
+            background-color: #f9f9f9;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin: 20px;
+            max-width: 400px;
+        }
 
-    }
+        .landing-title {
+            margin-bottom: 20px;
+        }
 
-    .navbar {
-        display: flex;
-        justify-content: flex-end;
-        padding: 20px;
-    }
+        .form-toggle {
+            display: flex;
+            justify-content: center;
+            margin-top: 10px;
+        }
 
-    .navbar a {
-        margin-left: 10px;
-        padding: 10px 20px;
-        color: white;
-        text-decoration: none;
-        background-color: lightblue;
-        border-radius: 5px;
-        transition: background-color 0.3s;
-    }
+        .form-toggle a {
+            margin: 0 5px;
+            color: blue;
+            text-decoration: underline;
+        }
 
-    .navbar a:hover {
-        background-color: #87ceeb;
-        animation: pulse 1s infinite;
-    }
-
-    @keyframes pulse {
-        0% { background-color: #87ceeb; }
-        50% { background-color: #00bfff; }
-        100% { background-color: #87ceeb; }
-    }
+        .hidden {
+            display: none;
+        }
     </style>
 </head>
 <body>
     <div class="landing-container">
-    <div class="navbar">
-        <a href="/login">Login</a>
-        <a href="/signup">Sign Up</a>
+        <h1 class="landing-title">Welcome to our Legal App</h1>
+        <div class="card-container">
+            <div class="card" id="signup-card">
+                <h2>Sign Up</h2>
+                <form action="/signup" method="POST">
+                    <label for="name">Name</label>
+                    <input type="text" id="name" name="name" required>
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required>
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" required>
+                    <button type="submit">Sign Up</button>
+                </form>
+                <div class="form-toggle">
+                    <p>Already have an account? <a href="#" onclick="toggleForm()">Login</a></p>
+                </div>
+            </div>
+            <div class="card hidden" id="login-card">
+                <h2>Login</h2>
+                <form action="/login" method="POST">
+                    <label for="username">Username</label>
+                    <input type="text" id="username" name="username" required>
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" required>
+                    <button type="submit">Login</button>
+                </form>
+                <div class="form-toggle">
+                    <p>Don't have an account? <a href="#" onclick="toggleForm()">Sign Up</a></p>
+                </div>
+            </div>
+        </div>
     </div>
-    <h1 class="landing-title">Welcome to the Website</h1>
-    </div>
+
+    <script>
+        function toggleForm() {
+            const signupCard = document.getElementById('signup-card');
+            const loginCard = document.getElementById('login-card');
+
+            signupCard.classList.toggle('hidden');
+            loginCard.classList.toggle('hidden');
+        }
+    </script>
 </body>
 </html>
