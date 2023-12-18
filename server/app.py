@@ -1,6 +1,6 @@
 import os
-from flask import Flask, render_template, request, send_from_directory, session, redirect
-from database import create_table, insert_user, verify_credentials
+from flask import Flask, jsonify, render_template, request, send_from_directory, session, redirect
+from database import create_table, insert_user, verify_credentials, create_feedback_table, get_feedbacks, add_feedback, like_feedback
 
 app = Flask(__name__)
 
