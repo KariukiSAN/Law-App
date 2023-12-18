@@ -123,6 +123,14 @@ The Law App includes a navigation bar (or other UI element) that allows users to
 Client-Server Communication
 The client and server are connected using fetch() (or socket.io, depending on your choice). This ensures efficient communication between the frontend and backend components.
 
+# Project Team
+Meet the team: 
+-Precious Njukia
+-Mark Mutugi
+-MikeBrian Munene
+-Annette Kariuki
+-Nick Njuru
+
 # Additional Information
 For more details on the specific functionalities and features of the Law App, please refer to the documentation within the docs directory.
 
