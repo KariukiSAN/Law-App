@@ -28,10 +28,6 @@ def seed_feedback_data():
 
     print("Seed data added successfully.")
 
-if __name__ == "__main__":
-    seed_feedback_data()
-
-
 def seed_data():
     with app.app_context():
 
@@ -39,4 +35,5 @@ def seed_data():
 
 
 if __name__ == '__main__':
+    seed_feedback_data()
     seed_data()
