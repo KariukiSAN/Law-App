@@ -1,10 +1,12 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 function Dashboard() {
   return (
     <div>
-      <h1>Dashboard Page</h1>
-      {/* Add your dashboard content here */}
+      
+      <Link to="/feedbacks">Feedbacks</Link>
+      
     </div>
   );
 }

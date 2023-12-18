@@ -1,11 +1,13 @@
-import os
-from flask import Flask, render_template, request, send_from_directory, session, redirect
-from database import create_table, insert_user, verify_credentials
+from flask import Flask,jsonify, render_template, request, send_from_directory, session, redirect
+from database import create_table, insert_user, verify_credentials,  create_feedback_table, get_feedbacks, add_feedback, like_feedback
+from flask_cors import CORS
 
 app = Flask(__name__)
 app.secret_key = 'your_secret_key'
+CORS(app)
 
 create_table()
+create_feedback_table()
 
 @app.route('/')
 def landing():
@@ -46,5 +48,29 @@ def logout():
     session.pop('username', None)
     return redirect('/')
 
+@app.route('/feedbacks', methods=['GET'])
+def get_feedbacks_route():
+    feedbacks = get_feedbacks()
+    formatted_feedbacks = [
+        {"id": feedback[0], "text": feedback[1], "likes": feedback[2]} for feedback in feedbacks
+    ]
+    return jsonify(formatted_feedbacks)
+
+# New API endpoint to add new feedback
+@app.route('/feedbacks', methods=['POST'])
+def add_feedback_route():
+    data = request.get_json()
+    add_feedback(data.get('text'))
+    return jsonify({"message": "Feedback added successfully"}), 201
+
+@app.route('/feedbacks/<int:feedback_id>/like', methods=['PUT'])
+def like_feedback_route(feedback_id):
+    try:
+        like_feedback(feedback_id)
+        return jsonify({"message": "Feedback liked successfully"})
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+    
+    
 if __name__ == '__main__':
     app.run(debug=True)
