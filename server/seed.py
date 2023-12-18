@@ -1,5 +1,7 @@
 import sqlite3
 from database import create_feedback_table, add_feedback
+from models import db
+from app import app
 
 def seed_feedback_data():
     # Add your fake feedback entries here
@@ -28,3 +30,13 @@ def seed_feedback_data():
 
 if __name__ == "__main__":
     seed_feedback_data()
+
+
+def seed_data():
+    with app.app_context():
+
+        db.create_all()
+
+
+if __name__ == '__main__':
+    seed_data()

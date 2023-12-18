@@ -1,10 +1,17 @@
-from flask import Flask,jsonify, render_template, request, send_from_directory, session, redirect
-from database import create_table, insert_user, verify_credentials,  create_feedback_table, get_feedbacks, add_feedback, like_feedback
-from flask_cors import CORS
+import os
+from flask import Flask, render_template, request, send_from_directory, session, redirect
+from database import create_table, insert_user, verify_credentials
 
 app = Flask(__name__)
+
+# Get the absolute path to the current directory
+basedir = os.path.abspath(os.path.dirname(__file__))
+
+# Set the path to the SQLite database file inside the 'database' folder
+db_path = os.path.join(basedir, 'database', 'users.db')
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + db_path
+
 app.secret_key = 'your_secret_key'
-CORS(app)
 
 create_table()
 create_feedback_table()
