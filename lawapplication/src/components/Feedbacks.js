@@ -1,7 +1,14 @@
 import React, { useState, useEffect } from 'react';
+import './feedback.css';
+import p from './images/p.jpg';
+import p1 from './images/p1.jpg';
+import p2 from './images/p2.jpg';
+import p3 from './images/p3.jpg';
+import p4 from './images/p4.jpg';
 
 const Feedbacks = () => {
   const [feedbacks, setFeedbacks] = useState([]);
+  
   const [newFeedback, setNewFeedback] = useState('');
 
   useEffect(() => {
@@ -18,7 +25,7 @@ const Feedbacks = () => {
         console.error(error.message);
       }
     };
-  
+
     fetchFeedbacks();
   }, []);
 
@@ -39,6 +46,24 @@ const Feedbacks = () => {
       const data = await response.json();
       setFeedbacks([...feedbacks, data]);
       setNewFeedback('');
+    } catch (error) {
+      console.error(error.message);
+    }
+  };
+
+  const handleDelete = async (feedbackId) => {
+    try {
+      const response = await fetch(`http://127.0.0.1:5000/feedbacks/${feedbackId}`, {
+        method: 'DELETE',
+      });
+
+      if (!response.ok) {
+        throw new Error(`Error deleting feedback: ${response.status} ${response.statusText}`);
+      }
+
+      const updatedFeedbacks = feedbacks.filter((feedback) => feedback.id !== feedbackId);
+
+      setFeedbacks(updatedFeedbacks);
     } catch (error) {
       console.error(error.message);
     }
@@ -68,21 +93,31 @@ const Feedbacks = () => {
   };
 
   return (
-    <div>
-      <h1>Feedback</h1>
-      <div>
-      {feedbacks.map((feedback) => (
-      <div key={feedback.id} style={{ marginBottom: '30px' }}>
-       {feedback.text}
-       <div>
-      <button style={{ marginTop: '10px' }}onClick={() => handleLike(feedback.id)}>❤️ </button>
-      <span>{feedback.likes} likes</span>
-     </div>
-  </div>
-))}
-
+    <div className='feedback-page'>
+      <div className="feedback-container">
+        <h1>Feedback</h1>
+        {feedbacks.map((feedback, index) => (
+          <div key={feedback.id} className="feedback-item">
+            {index < 5 && (
+              <img
+                src={
+                  index === 0 ? p : index === 1 ? p1 : index === 2 ? p2 : index === 3 ? p3 : p4
+                }
+                alt="person"
+                className="person-img"
+              />
+            )}
+            <div className="feedback-text">{feedback.text}</div>
+            <div className='button-container'>
+              <div className="feedback-buttons">
+                <button onClick={() => handleLike(feedback.id)} className="like-button">❤️</button>
+                <button onClick={() => handleDelete(feedback.id)} className="delete-button">🗑️</button>
+              </div>
+            </div>
+          </div>
+        ))}
       </div>
-      <div>
+      <div className='leavefeedback'>
         <h3>Leave a Feedback:</h3>
         <input
           type="text"
@@ -96,3 +131,4 @@ const Feedbacks = () => {
 };
 
 export default Feedbacks;
+

@@ -1,0 +1,119 @@
+h1{
+    color: black;
+    font-family: 'Times New Roman', Times, serif;
+    margin-top: none;
+}
+.feedback-page {
+    max-width: 800px;
+    margin: 0 auto;
+    background: white;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+  
+  .person-img {
+    width: 150px; /* Adjust the width as needed */
+    height: 150px; /* Adjust the height as needed */
+    object-fit: cover;
+    transition: transform 0.3s ease-in-out;
+    border-radius: 20px;
+    flex-direction: row;
+  }
+  
+  .person-img:hover {
+    transform: scale(1.1);
+  }
+  
+  .feedback-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  .feedback-item {
+    width: 48%; /* Adjust the width as needed */
+    margin-bottom: 20px;
+  }
+  
+  .feedback-text {
+    margin-left: 10px;
+    flex-grow: 1;
+  }
+  
+  .feedback-buttons {
+    display: flex;
+    align-items: center;
+  }
+  
+  .like-button,
+  .delete-button {
+    margin-left: 10px;
+  }
+  
+  /* Responsive styles */
+  @media screen and (max-width: 768px) {
+    .feedback-item {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+  
+    .person-img {
+      margin-bottom: 10px;
+    }
+  
+    .feedback-buttons {
+      margin-top: 10px;
+    }
+  }
+  /* Add these styles to your existing CSS file or update the existing styles */
+
+/* Styles for like and delete buttons */
+.button-container {
+    display: flex;
+    align-items: center;
+  }
+  
+  .like-button,
+  .delete-button {
+    background-color: transparent; /* Set button background to transparent */
+    border: none; /* Remove button border */
+    cursor: pointer; /* Change cursor to pointer on hover */
+    margin: 5px; /* Adjust margin for spacing */
+    padding: 5px; /* Adjust padding for button size */
+    font-size: 14px; 
+  }
+  
+  .like-button:hover,
+  .delete-button:hover {
+    background-color: #ddd; 
+  }
+  
+  .leavefeedback {
+    margin-top: 20px; /* Adjust margin-top as needed */
+  }
+  
+  .leavefeedback h3 {
+    color: black; /* Adjust text color as needed */
+    font-family: 'Times New Roman', Times, serif;
+  }
+  
+  .leavefeedback input {
+    padding: 5px;
+    margin-bottom: 30px;
+  }
+  
+  .leavefeedback button {
+    background-color: rgb(41, 112, 188); /* Set button background color to blue */
+    color: white; /* Set button text color to white */
+    border: none; /* Remove button border */
+    cursor: pointer; /* Change cursor to pointer on hover */
+    padding: 5px; /* Adjust padding for button size */
+    font-size: 16px;
+    border-radius: 10px; /* Adjust font size */
+  }
+  
+  .leavefeedback button:hover {
+    background-color: darkblue; /* Change button background color on hover */
+  }

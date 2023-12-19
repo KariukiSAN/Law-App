@@ -1,9 +1,10 @@
 import os
 from flask import Flask, jsonify, render_template, request, send_from_directory, session, redirect
-from database import create_table, insert_user, verify_credentials, create_feedback_table, get_feedbacks, add_feedback, like_feedback
+from database import create_table, insert_user, verify_credentials, create_feedback_table, get_feedbacks, add_feedback, like_feedback, delete_feedback
+from flask_cors import CORS
 
 app = Flask(__name__)
-
+CORS(app)
 # Get the absolute path to the current directory
 basedir = os.path.abspath(os.path.dirname(__file__))
 
@@ -69,6 +70,14 @@ def add_feedback_route():
     data = request.get_json()
     add_feedback(data.get('text'))
     return jsonify({"message": "Feedback added successfully"}), 201
+
+@app.route('/feedbacks/<int:feedback_id>', methods=['DELETE'])
+def delete_feedback_route(feedback_id):
+    try:
+        delete_feedback(feedback_id)
+        return jsonify({"message": "Feedback deleted successfully"})
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
 
 @app.route('/feedbacks/<int:feedback_id>/like', methods=['PUT'])
 def like_feedback_route(feedback_id):

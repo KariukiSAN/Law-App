@@ -80,3 +80,13 @@ def like_feedback(feedback_id):
     c.execute("UPDATE feedbacks SET likes = likes + 1 WHERE id = ?", (feedback_id,))
     conn.commit()
     conn.close()
+
+def delete_feedback(feedback_id):
+    conn = sqlite3.connect('database/feedbacks.db')
+    c = conn.cursor()
+    
+    # Delete the feedback with the specified ID
+    c.execute("DELETE FROM feedbacks WHERE id = ?", (feedback_id,))
+    
+    conn.commit()
+    conn.close()
