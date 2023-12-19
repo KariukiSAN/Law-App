@@ -6,10 +6,12 @@ import './HeaderFooter.css';
 
 const HeaderFooter = () => {
   const [headerBackground, setHeaderBackground] = useState(0);
+  const [showSignUpForm, setShowSignUpForm] = useState(false);
+  const [showLoginForm, setShowLoginForm] = useState(false);
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setHeaderBackground((prevBackground) => (prevBackground + 1) % 3);
+      setHeaderBackground(prevBackground => (prevBackground + 1) % 3);
     }, 10000);
 
     return () => clearInterval(interval);
@@ -20,6 +22,16 @@ const HeaderFooter = () => {
     '/images/decreto-penale-di-condanna.jpg',
     '/images/202204_12-Differences-entre-un-avocat-daffaires-et-un-juriste-dentreprise.jpg',
   ];
+
+  const handleSignUpClick = () => {
+    setShowSignUpForm(true);
+    setShowLoginForm(false);
+  };
+
+  const handleLoginClick = () => {
+    setShowLoginForm(true);
+    setShowSignUpForm(false);
+  };
 
   return (
     <div>
@@ -37,10 +49,54 @@ const HeaderFooter = () => {
           </ul>
         </nav>
         <div>
-          <button>Login</button>
-          <button>Sign Up</button>
+          <button onClick={handleLoginClick}>Login</button>
+          <button onClick={handleSignUpClick}>Sign Up</button>
         </div>
       </header>
+
+      {showLoginForm && (
+        <div>
+          <h2>Welcome Back!</h2>
+          <form>
+            <label htmlFor="usernameOrEmail">Username, Phone Number, or Email:</label>
+            <input type="text" id="usernameOrEmail" placeholder="Enter your username, phone number, or email" />
+
+            <label htmlFor="password">Password:</label>
+            <input type="password" id="password" placeholder="Enter your password" />
+
+            <p><Link to="/forgot-password">Forgot password?</Link></p>
+
+            <button type="submit">Sign In</button>
+          </form>
+        </div>
+      )}
+
+      {showSignUpForm && (
+        <div>
+          <h2>Hello, We are glad to have you here. Welcome to our community!</h2>
+          <form>
+            <label htmlFor="fullName">Full Name:</label>
+            <input type="text" id="fullName" placeholder="Enter your full name" />
+
+            <label htmlFor="username">Username:</label>
+            <input type="text" id="username" placeholder="Enter your username" />
+
+            <label htmlFor="phoneNumber">Phone Number:</label>
+            <input type="text" id="phoneNumber" placeholder="Enter your phone number" />
+
+            <label htmlFor="email">Email Address:</label>
+            <input type="email" id="email" placeholder="Enter your email address" />
+
+            <label htmlFor="password">Set up Preferred Password:</label>
+            <input type="password" id="password" placeholder="Enter your preferred password" />
+
+            <label htmlFor="confirmPassword">Confirm Password:</label>
+            <input type="password" id="confirmPassword" placeholder="Confirm your password" />
+
+            <button type="submit">Sign Up</button>
+          </form>
+        </div>
+      )}
 
       {/* Footer Section */}
       <footer style={{ backgroundImage: 'url(/images/istockphoto-1251143642-612x612.jpg)' }}>
