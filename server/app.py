@@ -51,6 +51,13 @@ def dashboard():
     else:
         return redirect('/')
 
+@app.route('/services')
+def services():
+    if 'username' in session:
+        return render_template('services.html', username=session['username'])
+    else:
+        return redirect('/')
+
 @app.route('/logout')
 def logout():
     session.pop('username', None)

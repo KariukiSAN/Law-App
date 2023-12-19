@@ -5,7 +5,6 @@ import './App.css';
 import Home from './components/Home';
 import Signup from './components/Signup';
 import Login from './components/Login';
-import Dashboard from './components/Dashboard';
 import Feedbacks from './components/Feedbacks';
 
 function App() {
@@ -32,7 +31,6 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/feedbacks" element={<Feedbacks />} />
         </Routes>
       </Router>

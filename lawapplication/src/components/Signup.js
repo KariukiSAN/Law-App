@@ -4,7 +4,7 @@ function Signup() {
   return (
     <div>
       <h1>Signup Page</h1>
-      {/* Add your signup form here */}
+      {/*  signup form here */}
     </div>
   );
 }
